@@ -58,6 +58,55 @@ class TicTacToe
       end
     end
     counter
+  end
+  
+  def current_player
+    if turn_count(@board) % 2 == 0
+      "X"
+    else
+      "O"
+    end
+  end
+
+  def won?
+    WIN_COMBINATIONS.each do |item|
+      if @board[item[0]] == "X" && @board[item[1]] == "X" && @board[item[2]] == "X"
+        return item
+      elsif @board[item[0]] == "O" && @board[item[1]] == "O" && @board[item[2]] == "O"
+        return item
+      end
+    end
+    false
   end  
 
+  def full?
+    @board.all? do |number|
+      number=="X" or number=="O"
+    end
+  end  
+
+  def draw?
+    full?(@board) and !won?(@board)
+  end
+  
+  def over?
+    won?(@board) or full?(@board) or draw?(@board)
+  end
+  
+  def winner
+    if won?(@board)
+      @board[won?(@board)[0]]   # pick first index from winning combination
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end  
 end
