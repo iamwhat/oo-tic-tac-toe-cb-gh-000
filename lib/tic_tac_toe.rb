@@ -43,8 +43,8 @@ class TicTacToe
     input = gets.chomp
     index = input_to_index(input)
     if valid_move?(index)
-      move(@board, index, current_player(@board))
-      display_board(@board)
+      move(index, current_player(@board))
+      display_board
     else
       turn
     end
@@ -59,7 +59,7 @@ class TicTacToe
     end
     counter
   end
-  
+
   def current_player
     if turn_count(@board) % 2 == 0
       "X"
@@ -77,22 +77,22 @@ class TicTacToe
       end
     end
     false
-  end  
+  end
 
   def full?
     @board.all? do |number|
       number=="X" or number=="O"
     end
-  end  
+  end
 
   def draw?
     full?(@board) and !won?(@board)
   end
-  
+
   def over?
     won?(@board) or full?(@board) or draw?(@board)
   end
-  
+
   def winner
     if won?(@board)
       @board[won?(@board)[0]]   # pick first index from winning combination
@@ -108,5 +108,5 @@ class TicTacToe
     else
       puts "Cat's Game!"
     end
-  end  
+  end
 end
