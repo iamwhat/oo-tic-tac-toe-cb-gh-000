@@ -43,7 +43,7 @@ class TicTacToe
     input = gets.chomp
     index = input_to_index(input)
     if valid_move?(index)
-      move(index, current_player(@board))
+      move(index, current_player)
       display_board
     else
       turn
@@ -86,16 +86,16 @@ class TicTacToe
   end
 
   def draw?
-    full?(@board) and !won?(@board)
+    full? and !won?
   end
 
   def over?
-    won?(@board) or full?(@board) or draw?(@board)
+    won? or full? or draw?
   end
 
   def winner
-    if won?(@board)
-      @board[won?(@board)[0]]   # pick first index from winning combination
+    if won?
+      @board[won?[0]]   # pick first index from winning combination
     end
   end
 
